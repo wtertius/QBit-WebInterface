@@ -1,0 +1,9 @@
+        </div>
+      </div>
+    </div>
+
+    <script src="/qbit/js/jquery-1.7.2.min.js"></script>
+    <script src="/qbit/js/bootstrap.min.js"></script>
+    [% TRY; INCLUDE qbit/endbody.tt2; CATCH; ''; END %]
+  </body>
+</html>
