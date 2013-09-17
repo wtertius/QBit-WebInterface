@@ -1,3 +1,9 @@
+libqbit-webinterface-perl (0.002) raring; urgency=low
+
+  * Added default templates with JS/CSS/Images data
+
+ -- Sergei Svistunov <sergei-svistunov@yandex.ru>  Tue, 17 Sep 2013 13:14:03 +0400
+
 libqbit-webinterface-perl (0.001) raring; urgency=low
 
   * Initial commit
