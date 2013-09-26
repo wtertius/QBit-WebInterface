@@ -1,3 +1,11 @@
+libqbit-webinterface-perl (0.003) raring; urgency=low
+
+  * perltidy and evil expulsion.
+
+  * Method set_field_error is added.
+
+ -- Sergei Svistunov <sergei-svistunov@yandex.ru>  Thu, 26 Sep 2013 19:51:53 +0400
+
 libqbit-webinterface-perl (0.002) raring; urgency=low
 
   * Added default templates with JS/CSS/Images data
