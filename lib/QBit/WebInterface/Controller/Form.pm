@@ -62,10 +62,10 @@ sub set_field_error {
     my ($self, $field_name, $error) = @_;
 
     throw gettext('Error class must be Exception descendant.')
-    unless blessed($error) && $error->isa('Exception');
+      unless blessed($error) && $error->isa('Exception');
 
     $self->{'__FIELDS_ERROR__'}{$field_name} = $error;
-    return;
+    return FALSE;
 }
 
 sub get_field_names {
