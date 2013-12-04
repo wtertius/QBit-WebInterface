@@ -119,6 +119,19 @@ sub build_response {
         $self->response->status(404);
     }
 
+    my $ua = $self->request->http_header('User-Agent');
+    $self->response->headers->{'Pragma'} = ( $ua =~ /MSIE/ ) ? 'public' : 'no-cache';
+
+    $self->response->headers->{'Cache-Control'} = ( $ua =~ /MSIE/ )
+      ? 'must-revalidate, post-check=0, pre-check=0'
+      : 'no-cache, no-store, max-age=0, must-revalidate';
+
+    my $tm = time();
+    my $zone =  (strftime("%z", localtime($tm)) + 0) / 100;
+    my $GMT = strftime("%a, %d %b %Y %H:%M:%S GMT", localtime($tm - $zone * 3600 ));
+    $self->response->headers->{'Expires'} = $GMT;
+
+
     $self->post_run();
 
     $self->response->timelog($self->timelog);
