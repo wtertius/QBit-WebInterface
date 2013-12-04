@@ -119,10 +119,10 @@ sub build_response {
         $self->response->status(404);
     }
 
+    my $ua = $self->request->http_header('User-Agent');
+    $self->response->headers->{'Pragma'} = ( $ua =~ /MSIE/ ) ? 'public' : 'no-cache';
 
-    $self->response->headers->{'Pragma'} = ( $ENV{'HTTP_USER_AGENT'} =~ /MSIE/ ) ? 'public' : 'no-cache';
-
-    $self->response->headers->{'Cache-Control'} = ( $ENV{'HTTP_USER_AGENT'} =~ /MSIE/ )# IE does not save docs
+    $self->response->headers->{'Cache-Control'} = ( $ua =~ /MSIE/ )
       ? 'must-revalidate, post-check=0, pre-check=0'
       : 'no-cache, no-store, max-age=0, must-revalidate';
 
