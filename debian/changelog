@@ -1,3 +1,11 @@
+libqbit-webinterface-perl (0.005) raring; urgency=low
+
+  * user agent take from hht_header, not from ENV
+
+  * add no-cache options for browser in build_response
+
+ -- Sergei Svistunov <sergei-svistunov@yandex.ru>  Wed, 04 Dec 2013 18:05:18 +0400
+
 libqbit-webinterface-perl (0.004) raring; urgency=low
 
   * each() evil is drive off.
