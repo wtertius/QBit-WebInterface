@@ -1,3 +1,9 @@
+libqbit-webinterface-perl (0.006) raring; urgency=low
+
+
+
+ -- Sergei Svistunov <sergei-svistunov@yandex.ru>  Wed, 04 Dec 2013 19:06:29 +0400
+
 libqbit-webinterface-perl (0.005) raring; urgency=low
 
   * user agent take from hht_header, not from ENV
