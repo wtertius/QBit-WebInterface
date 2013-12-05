@@ -1,3 +1,9 @@
+libqbit-webinterface-perl (0.008) raring; urgency=low
+
+  * change locale to en_US for GMT
+
+ -- Sergei Svistunov <sergei-svistunov@yandex.ru>  Thu, 05 Dec 2013 18:01:53 +0400
+
 libqbit-webinterface-perl (0.007) raring; urgency=low
 
   * add strftime from POSIX for build_response
