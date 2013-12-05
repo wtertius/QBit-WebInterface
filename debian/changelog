@@ -1,3 +1,9 @@
+libqbit-webinterface-perl (0.007) raring; urgency=low
+
+  * add strftime from POSIX for build_response
+
+ -- Sergei Svistunov <sergei-svistunov@yandex.ru>  Thu, 05 Dec 2013 13:56:51 +0400
+
 libqbit-webinterface-perl (0.006) raring; urgency=low
 
 
