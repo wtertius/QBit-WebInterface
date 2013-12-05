@@ -1,6 +1,6 @@
 package QBit::WebInterface;
 
-use POSIX qw(strftime);
+use POSIX qw(strftime setlocale LC_TIME);
 
 use qbit;
 
@@ -130,9 +130,12 @@ sub build_response {
 
     my $tm = time();
     my $zone =  (strftime("%z", localtime($tm)) + 0) / 100;
+    my $loc = setlocale( LC_TIME );
+    setlocale( LC_TIME, 'en_US.UTF-8' );
     my $GMT = strftime("%a, %d %b %Y %H:%M:%S GMT", localtime($tm - $zone * 3600 ));
-    $self->response->headers->{'Expires'} = $GMT;
+    setlocale(LC_TIME, $loc);
 
+    $self->response->headers->{'Expires'} = $GMT;
 
     $self->post_run();
 
