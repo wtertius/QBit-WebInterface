@@ -1,5 +1,7 @@
 package QBit::WebInterface;
 
+use POSIX qw(strftime);
+
 use qbit;
 
 use QBit::WebInterface::Response;
