@@ -1,1 +1,3 @@
-[% form.as_html %]
+[% WRAPPER page %]
+  [% form.as_html %]
+[% END %]

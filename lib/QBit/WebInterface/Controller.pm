@@ -75,7 +75,7 @@ sub import {
     my $app_pkg = caller();
     die gettext('Use only in QBit::WebInterface and QBit::Application descendant')
       unless $app_pkg->isa('QBit::WebInterface')
-          && $app_pkg->isa('QBit::Application');
+      && $app_pkg->isa('QBit::Application');
 
     my $pkg_stash = package_stash($package);
 
@@ -192,13 +192,7 @@ sub as_jsonp {
 sub from_template {
     my ($self, $name, %opts) = @_;
 
-    $self->response->data(
-        $self->_process_template(
-            $name, %opts,
-            pre_process => ['common.tt2', ($opts{'no_hf'} ? () : 'header.tt2')],
-            post_process => [($opts{'no_hf'} ? () : 'footer.tt2')]
-        )
-    );
+    $self->response->data($self->_process_template($name, %opts, pre_process => ['common.tt2']));
 
     return TRUE;
 }
@@ -271,9 +265,12 @@ sub check_anti_csrf_token {
 sub _process_template {
     my ($self, $name, %opts) = @_;
 
+    $self->timelog->start(gettext('Processing template'));
+
     my $wself = $self;
     weaken($wself);
 
+    $self->timelog->start(gettext('Creating TT2'));
     local $Template::Config::STASH    = 'Template::Stash::XS';
     local $Template::Config::PROVIDER = 'QBit::WebInterface::Controller::Template::Provider';
 
@@ -353,8 +350,12 @@ sub _process_template {
         POST_PROCESS => $opts{'post_process'},
     ) || throw $Template::ERROR;
 
+    $self->timelog->finish();
+
     my $tt_res = '';
     $template->process($name, {%{$opts{'vars'} || {}}, template_name => $name}, \$tt_res) || throw $template->error();
+
+    $self->timelog->finish();
 
     return \$tt_res;
 }
