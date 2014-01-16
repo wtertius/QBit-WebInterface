@@ -1,0 +1,14 @@
+package TestWebInterface;
+
+use qbit;
+
+use base qw(QBit::WebInterface::Test QBit::Application);
+
+use TestWebInterface::Controller::Test path => 'test';
+
+__PACKAGE__->config_opts(
+    TemplateIncludePaths => ['${ApplicationPath}/../lib/QBit/templates'],    # Use framework templates
+    MinimizeTemplate     => TRUE,
+);
+
+TRUE;
