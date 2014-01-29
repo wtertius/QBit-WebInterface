@@ -154,7 +154,8 @@ sub get_value {
 sub start_form_html {
     my ($self) = @_;
 
-    my $html = '<form class="form-horizontal" method="post">';
+    my $html = '<form class="form-horizontal" method="post"'
+      . (defined($self->{'enctype'}) ? " enctype=\"$self->{'enctype'}\"" : '') . '>';
     $html .= '<fieldset>';
     $html .= '<legend>' . html_encode($self->{'title'}) . '</legend>' if defined($self->{'title'});
 
