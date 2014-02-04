@@ -168,6 +168,12 @@ sub denied {
     $self->response->status(403);
 }
 
+sub not_found {
+    my ($self) = @_;
+
+    $self->response->status(404);
+}
+
 sub as_text {
     my ($self, $text) = @_;
 
