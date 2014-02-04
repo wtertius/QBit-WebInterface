@@ -1,3 +1,9 @@
+libqbit-webinterface-perl (0.012) raring; urgency=low
+
+  * Added sub not_found
+
+ -- Sergei Svistunov <sergei-svistunov@yandex.ru>  Tue, 04 Feb 2014 17:53:21 +0400
+
 libqbit-webinterface-perl (0.011) raring; urgency=low
 
   * Added enctype option in form
