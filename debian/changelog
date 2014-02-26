@@ -1,3 +1,21 @@
+libqbit-webinterface-perl (0.013) raring; urgency=low
+
+  * Check whether the symbol is function before addressing it.
+  * When the import WebInterface::Controller code calls to UNIVERSAL::isa
+    as to code ref, it exploits it. UNIVERSAL::isa is GLOB, no CODE. When
+    calling it as code, undefined function is created, so all calls to it
+    will result in call to undefined function and won't rich the code in
+    GLOB.
+
+  * Added some tests for QBit::WebInterface::Request
+
+  * Revert "Add request store-retrive logic."
+  * This reverts commit 43b371b3f40969d112f089d8eab5a4cafadcfd3e.
+
+  * Add request store-retrive logic.
+
+ -- Sergei Svistunov <sergei-svistunov@yandex.ru>  Wed, 26 Feb 2014 14:06:25 +0400
+
 libqbit-webinterface-perl (0.012) raring; urgency=low
 
   * Added sub not_found
