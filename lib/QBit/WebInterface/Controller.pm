@@ -75,7 +75,7 @@ sub import {
     my $app_pkg = caller();
     die gettext('Use only in QBit::WebInterface and QBit::Application descendant')
       unless $app_pkg->isa('QBit::WebInterface')
-      && $app_pkg->isa('QBit::Application');
+          && $app_pkg->isa('QBit::Application');
 
     my $pkg_stash = package_stash($package);
 
@@ -89,7 +89,11 @@ sub import {
 
     foreach my $cmd (@{$pkg_stash->{'__CMDS__'} || []}) {
         my ($name) =
-          grep {!ref($pkg_sym_table->{$_}) && $cmd->{'sub'} == \&{$pkg_sym_table->{$_}}}
+          grep {
+                !ref($pkg_sym_table->{$_})
+              && defined(&{$pkg_sym_table->{$_}})
+              && $cmd->{'sub'} == \&{$pkg_sym_table->{$_}}
+          }
           keys %$pkg_sym_table;
 
         $cmd->{'attrs'} = $pkg_stash->{'__CMD_ATTRS__'}{$cmd->{'package'}, $cmd->{'sub'}} || {};
