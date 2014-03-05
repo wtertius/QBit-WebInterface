@@ -75,7 +75,7 @@ sub import {
     my $app_pkg = caller();
     die gettext('Use only in QBit::WebInterface and QBit::Application descendant')
       unless $app_pkg->isa('QBit::WebInterface')
-          && $app_pkg->isa('QBit::Application');
+      && $app_pkg->isa('QBit::Application');
 
     my $pkg_stash = package_stash($package);
 
@@ -159,9 +159,12 @@ sub _get_url_absolute {
 sub redirect {
     my ($self, $cmd, %params) = @_;
 
-    my $path = delete($params{'path'});
+    my $path   = delete($params{'path'});
+    my $anchor = delete($params{'#anchor'});
 
     my $url = $self->app->make_cmd($cmd, $path, %params);
+
+    $url .= '#' . uri_escape($anchor) if defined($anchor);
 
     return $self->redirect2url($url);
 }
