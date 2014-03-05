@@ -1,3 +1,9 @@
+libqbit-webinterface-perl (0.014) raring; urgency=low
+
+  * Add anchor into redirect
+
+ -- Sergei Svistunov <sergei-svistunov@yandex.ru>  Wed, 05 Mar 2014 19:54:56 +0400
+
 libqbit-webinterface-perl (0.013) raring; urgency=low
 
   * Check whether the symbol is function before addressing it.
