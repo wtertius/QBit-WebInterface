@@ -1,3 +1,11 @@
+libqbit-webinterface-perl (0.017) raring; urgency=low
+
+  * Version 0.016
+
+  * Fixed tests
+
+ -- Sergei Svistunov <sergei-svistunov@yandex.ru>  Sun, 27 Apr 2014 11:28:36 +0400
+
 libqbit-webinterface-perl (0.016) raring; urgency=low
 
   * Fixed tests
