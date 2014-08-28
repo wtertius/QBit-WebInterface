@@ -109,6 +109,7 @@ sub build_response {
                 $self->response->status(500);
                 $self->response->data(undef);
             } else {
+                $self->response->status(200);
                 if (($self->request->http_header('Accept') || '') =~ /(application\/json|text\/javascript)/) {
                     $self->response->content_type("$1; charset=UTF-8");
                     $self->response->data(to_json({error => shift->message()}));
