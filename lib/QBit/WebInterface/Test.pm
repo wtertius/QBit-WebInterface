@@ -20,8 +20,11 @@ sub get_response {
             method  => $opts{'method'}  || 'GET',
             headers => $opts{'headers'} || {},
             scheme  => $opts{'scheme'}  || 'http'
-        )
+          )
     );
+
+    open($self->request->{'__STDIN__'}, '<', \$opts{'stdin'}) || throw "Cannot open file in memory"
+      if defined($opts{'stdin'});
 
     $self->build_response();
 
