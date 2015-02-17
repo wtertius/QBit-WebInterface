@@ -1,3 +1,9 @@
+libqbit-webinterface-perl (0.020) raring; urgency=low
+
+  * Fixed "+" in multipart form data
+
+ -- Sergei Svistunov <sergei-svistunov@yandex.ru>  Tue, 17 Feb 2015 12:54:39 +0400
+
 libqbit-webinterface-perl (0.019) raring; urgency=low
 
   * Don't redirect when 500 error on test happened.
