@@ -39,7 +39,7 @@ sub param_array {
 
     $self->_parse_params() unless exists($self->{'__PARAMS__'});
 
-    return $self->{'__PARAMS__'}{$name || ''} || [];
+    return clone($self->{'__PARAMS__'}{$name || ''}) || [];
 }
 
 sub param {
