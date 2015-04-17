@@ -1,3 +1,11 @@
+libtertiusqbit-webinterface-perl (0.022) raring; urgency=low
+
+  * Rename debian package
+
+  * Clone params before returning.
+
+ -- Dmitry Lukiyanchuk <tertius@yandex-team.ru>  Fri, 17 Apr 2015 17:17:36 +0300
+
 libtertiusqbit-webinterface-perl (0.021) raring; urgency=low
 
   * Clearify that ajax message is 'Internal Server Error'.
