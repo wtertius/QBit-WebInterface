@@ -1,12 +1,14 @@
-Source: libqbit-webinterface-perl
+Source: libtertiusqbit-webinterface-perl
 Section: perl
 Priority: extra
-Maintainer: Sergei Svistunov <sergei-svistunov@yandex.ru>
-Build-Depends: debhelper (>= 8.0.0), perl, libtest-deep-perl, libqbit-perl, libqbit-class-perl, libqbit-application-perl, libwww-perl, libtemplate-perl
+Maintainer: Dmitry Lukiyanchuk <wtertius@gmail.com>
+Build-Depends: debhelper (>= 8.0.0), perl, libtest-deep-perl, libtertiusqbit-perl, libtertiusqbit-class-perl, libtertiusqbit-application-perl, libwww-perl, libtemplate-perl
 Standards-Version: 3.9.4
 
-Package: libqbit-webinterface-perl
+Package: libtertiusqbit-webinterface-perl
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}, ${perl:Depends}, perl, libqbit-perl, libqbit-class-perl, libqbit-application-perl, libwww-perl, libtemplate-perl
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${perl:Depends}, perl, libtertiusqbit-perl, libtertiusqbit-class-perl, libtertiusqbit-application-perl, libwww-perl, libtemplate-perl
+Conflicts: libqbit-webinterface-perl
+Replaces: libqbit-webinterface-perl
 Description: Base class for creating web interface.
  Base class for creating web interface.
