@@ -45,10 +45,25 @@ sub get_cmds {
 sub build_response {
     my ($self) = @_;
 
-    $self->pre_run();
+    try {
+        $self->_build_response();
+    }
+    catch {
+        $self->_catch_internal_server_error(@_);
+
+        try {
+            $self->set_headers();
+        };
+    };
+}
+
+sub _build_response {
+    my ($self) = @_;
 
     throw gettext('No request object') unless $self->request;
     $self->response(QBit::WebInterface::Response->new());
+
+    $self->pre_run();
 
     my $cmds = $self->get_cmds();
     my ($path, $cmd) = $self->get_cmd();
@@ -107,25 +122,31 @@ sub build_response {
         $self->response->status(404);
     }
 
-    my $ua = $self->request->http_header('User-Agent');
-    $self->response->headers->{'Pragma'} = ( $ua =~ /MSIE/ ) ? 'public' : 'no-cache';
-
-    $self->response->headers->{'Cache-Control'} = ( $ua =~ /MSIE/ )
-      ? 'must-revalidate, post-check=0, pre-check=0'
-      : 'no-cache, no-store, max-age=0, must-revalidate';
-
-    my $tm = time();
-    my $zone =  (strftime("%z", localtime($tm)) + 0) / 100;
-    my $loc = setlocale( LC_TIME );
-    setlocale( LC_TIME, 'en_US.UTF-8' );
-    my $GMT = strftime("%a, %d %b %Y %H:%M:%S GMT", localtime($tm - $zone * 3600 ));
-    setlocale(LC_TIME, $loc);
-
-    $self->response->headers->{'Expires'} = $GMT;
-
+    $self->set_headers();
     $self->post_run();
 
     $self->response->timelog($self->timelog);
+}
+
+sub set_headers {
+    my ($self) = @_;
+
+    my $ua = $self->request->http_header('User-Agent');
+    $self->response->headers->{'Pragma'} = ($ua =~ /MSIE/) ? 'public' : 'no-cache';
+
+    $self->response->headers->{'Cache-Control'} =
+      ($ua =~ /MSIE/)
+      ? 'must-revalidate, post-check=0, pre-check=0'
+      : 'no-cache, no-store, max-age=0, must-revalidate';
+
+    my $tm   = time();
+    my $zone = (strftime("%z", localtime($tm)) + 0) / 100;
+    my $loc  = setlocale(LC_TIME);
+    setlocale(LC_TIME, 'en_US.UTF-8');
+    my $GMT = strftime("%a, %d %b %Y %H:%M:%S GMT", localtime($tm - $zone * 3600));
+    setlocale(LC_TIME, $loc);
+
+    $self->response->headers->{'Expires'} = $GMT;
 }
 
 sub break {
@@ -187,9 +208,7 @@ sub _catch_internal_server_error {
         $self->response->status(200);
         if (($self->request->http_header('Accept') || '') =~ /(application\/json|text\/javascript)/) {
             $self->response->content_type("$1; charset=UTF-8");
-            $self->response->data(
-                to_json({error => gettext('Internal Server Error: %s', $exception->message())})
-            );
+            $self->response->data(to_json({error => gettext('Internal Server Error: %s', $exception->message())}));
         } else {
             $self->response->data($self->_exception2html($exception));
         }
@@ -222,7 +241,7 @@ sub _exception2html {
     };
 
     my $html =
-        '<html>'
+        '<html>' 
       . '<head>'
       . '<meta http-equiv="content-type" content="text/html; charset=UTF-8">'
       . '<title>'
@@ -296,8 +315,8 @@ sub _exception2html {
       . '</table>'
       . '</div>'
 
-      . '<div style="background-color: #FFFACD; padding: 5px 10px; margin: 1px;">'
-      . '<h3>Backtrace:</h3>'
+      . '<div style="background-color: #FFFACD; padding: 5px 10px; margin: 1px;">' 
+      . '<h3>Backtrace:</h3>' 
       . join(
         '',
         map {
