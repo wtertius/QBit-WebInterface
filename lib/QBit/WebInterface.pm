@@ -223,10 +223,20 @@ sub _exception2html {
 
     my $short_dumper = sub {
         my ($data, $max_depth) = @_;
+
+        my $data_to_print;
+        if (blessed($data) && reftype($data) eq 'HASH') {
+            foreach my $key (keys(%$data)) {
+                $data_to_print->{$key} = $data->{$key} unless blessed($data->{$key});
+            }
+        } else {
+            $data_to_print = $data;
+        }
+
         local $Data::Dumper::Maxdepth = $max_depth;
         local $Data::Dumper::Varname  = '';
         local $Data::Dumper::Sortkeys = TRUE;
-        my $dtext = Dumper($data);
+        my $dtext = Dumper($data_to_print);
 
         $dtext =~ /^(\$\d+ = )/;
         my $prefix_length = $1 ? length($1) : 0;
