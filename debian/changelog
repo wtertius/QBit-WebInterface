@@ -1,3 +1,11 @@
+libtertiusqbit-webinterface-perl (0.023) raring; urgency=low
+
+  * Less useless information in error backtrace.
+
+  * Catch internal server error at pre_run level.
+
+ -- Dmitry Lukiyanchuk <tertius@yandex-team.ru>  Thu, 30 Apr 2015 15:32:19 +0300
+
 libtertiusqbit-webinterface-perl (0.022) raring; urgency=low
 
   * Rename debian package
