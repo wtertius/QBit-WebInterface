@@ -1,3 +1,9 @@
+libtertiusqbit-webinterface-perl (0.024) raring; urgency=low
+
+  * Allow FALSE defined name for param.
+
+ -- Dmitry Lukiyanchuk <tertius@yandex-team.ru>  Tue, 05 May 2015 14:00:24 +0300
+
 libtertiusqbit-webinterface-perl (0.023) raring; urgency=low
 
   * Less useless information in error backtrace.
