@@ -1,3 +1,9 @@
+libtertiusqbit-webinterface-perl (0.025) raring; urgency=low
+
+  * Use qbit::Host::hostname sub.
+
+ -- Dmitry Lukiyanchuk <tertius@yandex-team.ru>  Wed, 06 May 2015 23:39:02 +0300
+
 libtertiusqbit-webinterface-perl (0.024) raring; urgency=low
 
   * Allow FALSE defined name for param.
