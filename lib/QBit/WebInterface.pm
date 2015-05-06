@@ -218,8 +218,7 @@ sub _catch_internal_server_error {
 sub _exception2html {
     my ($self, $exception) = @_;
 
-    my $server = `hostname -f`;
-    chomp($server);
+    my $server = hostname();
 
     my $short_dumper = sub {
         my ($data, $max_depth) = @_;
