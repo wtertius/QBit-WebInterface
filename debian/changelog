@@ -1,3 +1,10 @@
+libtertiusqbit-webinterface-perl (0.026) raring; urgency=low
+
+  * Don't keep default value of field if exception throwed on request
+    value parsing.
+
+ -- Dmitry Lukiyanchuk <tertius@yandex-team.ru>  Tue, 12 May 2015 12:06:53 +0300
+
 libtertiusqbit-webinterface-perl (0.025) raring; urgency=low
 
   * Use qbit::Host::hostname sub.
