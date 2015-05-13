@@ -197,11 +197,9 @@ sub _escape_filename {
 sub _catch_internal_server_error {
     my ($self, $exception) = @_;
 
-    if (my $dir = $self->get_option('error_dump_dir')) {
-        require File::Path;
-        File::Path::make_path($dir);
-        writefile("$dir/dump_" . format_date(curdate(), '%Y%m%d_%H%M%S') . "${$}.html",
-            $self->_exception2html($exception));
+    if ($self->get_option('error_dump_dir')) {
+        $self->_dump_error($exception);
+
         $self->response->status(500);
         $self->response->data(undef);
     } else {
@@ -215,8 +213,31 @@ sub _catch_internal_server_error {
     }
 }
 
-sub _exception2html {
+sub _warn {
     my ($self, $exception) = @_;
+
+    throw $exception if $self->get_option('warnings_are_fatal');
+
+    if ($self->get_option('error_dump_dir')) {
+        $self->_dump_error($exception, warning => TRUE);
+    }
+}
+
+sub _dump_error {
+    my ($self, $exception, %opts) = @_;
+
+    my $dir = $self->get_option('error_dump_dir');
+
+    require File::Path;
+    File::Path::make_path($dir);
+    writefile("$dir/dump_" . format_date(curdate(), '%Y%m%d_%H%M%S') . "${$}.html",
+        $self->_exception2html($exception, %opts));
+
+    return FALSE;
+}
+
+sub _exception2html {
+    my ($self, $exception, %opts) = @_;
 
     my $server = hostname();
 
@@ -249,6 +270,7 @@ sub _exception2html {
         return $dtext;
     };
 
+    my $message_color = $opts{warning} ? '#FFFF99' : '#FF7777';
     my $html =
         '<html>' 
       . '<head>'
@@ -272,7 +294,9 @@ sub _exception2html {
       . html_encode(format_date(curdate(), '%c')) . '<br>'
       . '</div>'
 
-      . '<div style="background-color: #FF7777; font-size: 110%; padding: 5px 10px; margin: 1px;">' . '<h3>'
+      . '<div style="background-color: '
+      . $message_color
+      . '; font-size: 110%; padding: 5px 10px; margin: 1px;">' . '<h3>'
       . html_encode(ref($exception)) . '</h3>'
       . '<h4><pre>'
       . html_encode($exception->{'text'})
