@@ -58,7 +58,6 @@ sub as_html {
 sub process {
     my ($self, $controller) = @_;
 
-    delete($self->{'value'});
     $self->{'value'} = $self->value_from_request($controller->request);
     $self->{'value'} = $self->trim($self->{'value'}) if $self->{'trim'};
     $self->{'value'} = $self->clean($self->{'value'});
