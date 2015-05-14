@@ -1,3 +1,11 @@
+libtertiusqbit-webinterface-perl (0.027) raring; urgency=low
+
+  * Set 'Warning' title to the warning message.
+
+  * Add _warn method for not fatal but important error sending.
+
+ -- Dmitry Lukiyanchuk <tertius@yandex-team.ru>  Thu, 14 May 2015 11:23:33 +0300
+
 libtertiusqbit-webinterface-perl (0.026) raring; urgency=low
 
   * Don't keep default value of field if exception throwed on request
