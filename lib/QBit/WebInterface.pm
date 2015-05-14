@@ -198,7 +198,7 @@ sub _catch_internal_server_error {
     my ($self, $exception) = @_;
 
     if ($self->get_option('error_dump_dir')) {
-        $self->_dump_error($exception);
+        $self->_dump_exception($exception);
 
         $self->response->status(500);
         $self->response->data(undef);
@@ -216,14 +216,16 @@ sub _catch_internal_server_error {
 sub _warn {
     my ($self, $exception) = @_;
 
-    throw $exception if $self->get_option('warnings_are_fatal');
-
-    if ($self->get_option('error_dump_dir')) {
-        $self->_dump_error($exception, warning => TRUE);
+    if ($self->get_option('warnings_are_fatal')) {
+        throw $exception;
+    } elsif ($self->get_option('error_dump_dir')) {
+        $self->_dump_exception($exception, warning => TRUE);
+    } else {
+        throw $exception;
     }
 }
 
-sub _dump_error {
+sub _dump_exception {
     my ($self, $exception, %opts) = @_;
 
     my $dir = $self->get_option('error_dump_dir');
@@ -270,13 +272,15 @@ sub _exception2html {
         return $dtext;
     };
 
-    my $message_color = $opts{warning} ? '#FFFF99' : '#FF7777';
+    my $message_color = $opts{warning} ? '#FFFF99'          : '#FF7777';
+    my $message_level = $opts{warning} ? gettext('Warning') : gettext('Fatal error');
+
     my $html =
         '<html>' 
       . '<head>'
       . '<meta http-equiv="content-type" content="text/html; charset=UTF-8">'
       . '<title>'
-      . gettext('Fatal error')
+      . $message_level
       . '</title>'
       . '</head>'
       . '<body bgcolor="#FFFFFF" text="#000000">'
