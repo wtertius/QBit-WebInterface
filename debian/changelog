@@ -1,3 +1,11 @@
+libtertiusqbit-webinterface-perl (0.028) raring; urgency=low
+
+  * Revert "Don't keep default value of field if exception throwed on
+    request value parsing."
+  * This reverts commit f564293065b99238ee09a445da36cfabc15ebe8c.
+
+ -- Dmitry Lukiyanchuk <tertius@yandex-team.ru>  Thu, 14 May 2015 17:39:11 +0300
+
 libtertiusqbit-webinterface-perl (0.027) raring; urgency=low
 
   * Set 'Warning' title to the warning message.
