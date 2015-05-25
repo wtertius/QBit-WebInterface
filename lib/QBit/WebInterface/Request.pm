@@ -169,8 +169,11 @@ sub _unescape {
     if (ref($$str_ptr) eq 'SCALAR') {
         $$str_ptr = $$$str_ptr;
     } else {
-        $$str_ptr =~ tr/+/ /;
-        $$str_ptr =~ s/%([a-fA-F0-9][a-fA-F0-9])/pack("C", hex($1))/eg;
+        for ($$str_ptr) {
+            tr/+\t\n/ /;
+            s/%([a-fA-F0-9][a-fA-F0-9])/pack("C", hex($1))/eg;
+            s/^\s+|\s+$//g;
+        }
     }
     utf8::decode($$str_ptr);
 }
