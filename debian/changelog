@@ -1,3 +1,9 @@
+libtertiusqbit-webinterface-perl (0.029) raring; urgency=low
+
+  * Trim request values.
+
+ -- Dmitry Lukiyanchuk <tertius@yandex-team.ru>  Mon, 25 May 2015 15:50:52 +0300
+
 libtertiusqbit-webinterface-perl (0.028) raring; urgency=low
 
   * Revert "Don't keep default value of field if exception throwed on
