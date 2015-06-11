@@ -191,6 +191,8 @@ sub _escape_filename {
     $filename =~ s{\r}{}g;
     $filename =~ s{\n}{}g;
 
+    utf8::encode($filename);
+
     return $filename;
 }
 
