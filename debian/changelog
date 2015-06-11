@@ -1,3 +1,9 @@
+libtertiusqbit-webinterface-perl (0.030) raring; urgency=low
+
+  * utf8::encode for filename.
+
+ -- Dmitry Lukiyanchuk <tertius@yandex-team.ru>  Thu, 11 Jun 2015 14:35:36 +0300
+
 libtertiusqbit-webinterface-perl (0.029) raring; urgency=low
 
   * Trim request values.
