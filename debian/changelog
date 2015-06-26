@@ -1,3 +1,9 @@
+libtertiusqbit-webinterface-perl (0.032) raring; urgency=low
+
+  * Pre process form field.
+
+ -- Dmitry Lukiyanchuk <tertius@yandex-team.ru>  Fri, 26 Jun 2015 16:53:00 +0300
+
 libtertiusqbit-webinterface-perl (0.031) raring; urgency=low
 
   * No changes
