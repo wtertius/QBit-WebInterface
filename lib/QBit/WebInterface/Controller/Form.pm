@@ -91,6 +91,10 @@ sub process {
     my @pre_process_data = $self->{'pre_process'}($self) if exists($self->{'pre_process'});
     return @pre_process_data if $self->{'__BREAK_PROCESS__'};
 
+    foreach my $field (@{$self->{'__FIELDS__'}}) {
+        $field->pre_process($self->controller) if $field->can('pre_process');
+    }
+
     $self->{'__FIELDS_ERROR__'} = {};
     delete($self->{'__ERROR__'});
 
